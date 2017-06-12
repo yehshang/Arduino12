@@ -1,0 +1,23 @@
+#include <SoftwareSerial.h>
+#include <ESP8266.h>
+
+SoftwareSerial mySerial(11, 10); /* RX:D11, TX:D10 */
+//ESP8266 wifi(mySerial);
+
+void setup() {
+  Serial.begin(9600);
+  
+  Serial.println("Goodnight moon!");
+ // Serial.println("AT");
+  mySerial.begin(115200);
+}
+
+void loop() { 
+  if (mySerial.available()) {
+    Serial.write(mySerial.read());
+  }
+  if (Serial.available()) {
+    //char chars=Serial.read();
+    mySerial.write(Serial.read());
+  }
+}
